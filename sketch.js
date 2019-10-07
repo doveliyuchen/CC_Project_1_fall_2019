@@ -1,35 +1,83 @@
+let cat;
 function setup() {
   createCanvas(800, 800);
+  
 }
 
 function draw() {
   background(220);
   noFill();
-  push();
-  translate(60,150);
-  kuohao();
-  pop();
-  omiga();
-  eye();
+   cat = new Cat(mouseX, mouseY, 5);
+  cat.display();
 }
 
+class Cat {
 
-function kuohao() {
-  arc(200,200,100,180,2.3,4.1)
-  translate(400,400);
-  rotate(PI);
-  arc(0,200,100,180,2.19,3.98)
+  constructor(x, y, a) {
+
+    this.x = x;
+    this.y = y;
+    this.a = a;
+
+  }
+  display() {
+
+
+    this.kuohao();
+    this.omiga();
+    this.eye();
+    this.ear();
+    this.zhuazi();
+  }
+ kuohao() {
+  scale(this.a / 5);
+    arc(this.x - 100, this.y, 80, 120, 2.3, 4.1)
+
+    arc(this.x + 100, this.y, 80, 120, 5.32, 0.84)
 }
 
-function omiga() {
-  strokeWeight(4);
-  arc(350,350,20,30,0,3*PI/2)
-  arc(370,350,20,30,3*PI/2,PI)
+ omiga() {
+ scale(this.a / 5);
+    strokeWeight(4);
+    arc(this.x - 8, this.y, 15, 20, 0, 3 * PI / 2)
+    arc(this.x + 8, this.y, 15, 20, 3 * PI / 2, PI)
 }
-function eye() {
-  strokeWeight(4);
-  ellipse(330,345,5,5);
-  ellipse(390,345,5,5);
+ eye() {
+ scale(this.a / 5);
+    strokeWeight(4);
+    ellipse(this.x - 30, this.y - 5, 5, 10);
+    ellipse(this.x + 30, this.y - 5, 5, 10);
 }
-// function ear() {
-//   triangle(310,345,
+ear() {
+
+    noStroke();
+    scale(this.a / 5);
+    fill('#FFACC2');
+    triangle(this.x - 50, this.y - 25, this.x - 70, this.y - 45, this.x - 80, this.y - 15)
+    triangle(this.x + 50, this.y - 25, this.x + 70, this.y - 45, this.x + 80, this.y - 15)
+    strokeWeight(4);
+    stroke(0);
+    line(this.x - 50, this.y - 25, this.x - 70, this.y - 45)
+    line(this.x - 80, this.y - 15, this.x - 70, this.y - 45)
+    line(this.x + 50, this.y - 25, this.x + 70, this.y - 45)
+    line(this.x + 80, this.y - 15, this.x + 70, this.y - 45)
+
+  }
+  zhuazi() {
+    noFill()
+    arc(this.x - 100, this.y, 30, 30, PI, 2 * PI)
+    arc(this.x + 100, this.y, 30, 30, PI, 2 * PI)
+    ellipse(this.x - 100, this.y + 5, 15, 15)
+    ellipse(this.x + 100, this.y + 5, 15, 15)
+    line(this.x - 108, this.y - 8, this.x - 110, this.y - 20)
+    line(this.x - 100, this.y - 10, this.x - 100, this.y - 22)
+    line(this.x - 92, this.y - 8, this.x - 90, this.y - 20)
+    line(this.x + 108, this.y - 8, this.x + 110, this.y - 20)
+    line(this.x + 100, this.y - 10, this.x + 100, this.y - 22)
+    line(this.x + 92, this.y - 8, this.x + 90, this.y - 20)
+
+
+  }
+
+
+}
