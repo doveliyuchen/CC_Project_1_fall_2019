@@ -7,7 +7,7 @@ function setup() {
 function draw() {
   background(220);
   noFill();
-   cat = new Cat(mouseX, mouseY, 5);
+   cat = new Cat(mouseX, mouseY, 10);
   cat.display();
 }
 
@@ -15,35 +15,36 @@ class Cat {
 
   constructor(x, y, a) {
 
-    this.x = x;
-    this.y = y;
+    this.x = x/a*5;
+    this.y = y/a*5;
     this.a = a;
 
   }
   display() {
+     scale(this.a / 5);
 
 
-    this.kuohao();
+    //this.kuohao();
     this.omiga();
     this.eye();
     this.ear();
     this.zhuazi();
   }
  kuohao() {
-  scale(this.a / 5);
+ 
     arc(this.x - 100, this.y, 80, 120, 2.3, 4.1)
 
     arc(this.x + 100, this.y, 80, 120, 5.32, 0.84)
 }
 
  omiga() {
- scale(this.a / 5);
+
     strokeWeight(4);
     arc(this.x - 8, this.y, 15, 20, 0, 3 * PI / 2)
     arc(this.x + 8, this.y, 15, 20, 3 * PI / 2, PI)
 }
  eye() {
- scale(this.a / 5);
+
     strokeWeight(4);
     ellipse(this.x - 30, this.y - 5, 5, 10);
     ellipse(this.x + 30, this.y - 5, 5, 10);
@@ -51,7 +52,7 @@ class Cat {
 ear() {
 
     noStroke();
-    scale(this.a / 5);
+
     fill('#FFACC2');
     triangle(this.x - 50, this.y - 25, this.x - 70, this.y - 45, this.x - 80, this.y - 15)
     triangle(this.x + 50, this.y - 25, this.x + 70, this.y - 45, this.x + 80, this.y - 15)
@@ -78,6 +79,17 @@ ear() {
 
 
   }
+
+
+}
+class Map {
+   constructor() {
+  }
+
+display() {
+
+}
+
 
 
 }
