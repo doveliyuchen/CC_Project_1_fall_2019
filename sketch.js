@@ -1,16 +1,51 @@
 let cat;
+let cute;
+let ma;
+let xpos = 235;
+let ypos = 16;
+let t = 0;
+let a = 0;
+let b = 0;
+let c = 0;
 function setup() {
   createCanvas(800, 800);
-  
+  angleMode(RADIANS);
+
+
 }
 
 function draw() {
+  stroke(0);
   background(220);
   noFill();
-   cat = new Cat(mouseX, mouseY, 10);
-   cute = new Cute();
+   cat = new Cat(400, 400, 10);
+   cat.display();
+   ma = new Ma();
+   cute = new Cute(mouseX,mouseY,0.3);
    cute.display();
-  cat.display();
+  xpos = 235 - 30 * t
+  t = t + 0.02
+  ypos = 16 + 25 * a
+  a = a + 0.02
+  if (second() == 5) {
+    background(220);
+    cat.display1();
+  } else if (second() > 7 && second() < 300) {
+    ma.display();
+    cute.display();
+
+  }
+  if (t > 5.1 / 1.015) {
+    xpos = 235 - 30 * t + 45 * b
+    b = b + 0.02
+
+  }
+
+  if (ypos > 800) {
+    t = 0;
+    a = 0;
+    b = 0;
+  }
 }
 
 class Cat {
@@ -23,12 +58,21 @@ class Cat {
 
   }
   display() {
+     push();
      scale(this.a / 5);
 
 
     //this.kuohao();
     this.omiga();
     this.eye();
+    this.ear();
+    this.zhuazi();
+    pop();
+  }
+   display1() {
+    scale(this.a / 5);
+    this.omiga();
+    this.eye1();
     this.ear();
     this.zhuazi();
   }
@@ -80,26 +124,70 @@ ear() {
     line(this.x + 92, this.y - 8, this.x + 90, this.y - 20)
 
 
+
   }
 
 
 }
 class Map {
-   constructor() {
+
+
+ display() {
+    noStroke();
+    push()
+    background('#69C5FF');
+    fill('#FF7B3D');
+    ellipse(800, 0, 200, 200)
+    beginShape();
+    fill('#7BFF73');
+    vertex(0, 200);
+    quadraticVertex(200, 100, 400, 200);
+    quadraticVertex(600, 100, 800, 200);
+    endShape();
+    noStroke();
+    rect(0, 200, 800, 600);
+    beginShape();
+    noFill();
+
+    vertex(240, 150);
+    vertex(200, 200);
+    fill('#8F6750');
+    quadraticVertex(100, 350, 200, 500);
+    vertex(400, 500);
+    quadraticVertex(100, 350, 400, 200);
+
+    endShape();
+    beginShape();
+    vertex(240, 150);
+    quadraticVertex(420, 190, 400, 200);
+    endShape();
+    beginShape();
+
+    vertex(400, 500);
+
+    quadraticVertex(600, 700, 700, 800);
+    vertex(100, 800)
+    quadraticVertex(400, 700, 200, 500);
+    endShape();
+    pop();
+
   }
-
-display() {
-
-}
 
 
 
 }
 
 class Cute{
-
+ constructor(x,y,a) {
+     this.x=x;
+     this.y=y;
+     this.a=a;
+  }
 
  display(){
+  push();
+  scale(this.a);
+  translate(this.x/this.a,this.y/this.a)
   background(220);
   this.weiba();
   this.body();
@@ -115,13 +203,13 @@ class Cute{
   this.nose();
   this.heart();
   this.hands();
+  pop();
 
 }
-
+//tail
  weiba() {
   strokeWeight(6);
   beginShape();
-  //vertex(477, 438);
   vertex(433, 458);
   bezierVertex(492, 433, 496, 453, 484, 463);
   vertex(433, 494);
@@ -129,7 +217,7 @@ class Cute{
   stroke("#33190c");
   endShape();
 }
-
+//body
  body() {
   beginShape();
   vertex(255, 392);
@@ -143,7 +231,7 @@ class Cute{
   vertex(430, 393);
   endShape();
 }
-
+//white part
  whiteBody() {
   beginShape();
   fill(255);
@@ -159,7 +247,7 @@ class Cute{
 
 
 }
-
+//more parts of body
  bluePart() {
 
   fill("#e5f8ef");
@@ -175,7 +263,7 @@ class Cute{
 }
 
  ears() {
-  //        左边耳朵
+  //        left ear
   stroke("#33190c");
   fill("#ffffd9");
   strokeWeight(4);
@@ -184,7 +272,7 @@ class Cute{
   quadraticVertex(114, 4, 209, 14);
   endShape();
 
-  //        右边耳朵
+  //        right ear
   beginShape();
   strokeWeight(5);
 
@@ -215,7 +303,7 @@ class Cute{
 
 
 }
-//头
+//head
  head() {
   strokeWeight(10);
   stroke("#33190c");
@@ -245,6 +333,7 @@ class Cute{
 
  beard() {
   stroke("#33190c");
+  //left 
   strokeWeight(7);
   beginShape();
   vertex(23, 212);
@@ -258,7 +347,7 @@ class Cute{
   vertex(17, 281);
   vertex(9, 282);
   endShape();
-  //胡须(右边边)
+  //right
   strokeWeight(10);
   beginShape();
   vertex(530, 233);
@@ -277,7 +366,7 @@ class Cute{
 
 eyebro() {
 
-  //眉毛(左边)
+  //left eye brow
   strokeWeight(5);
   beginShape();
   vertex(163, 40);
@@ -285,7 +374,7 @@ eyebro() {
   vertex(182, 42);
   quadraticVertex(185, 42, 180, 42);
   endShape();
-  //眉毛(右边)
+  //right eyebrow
   beginShape();
   strokeWeight(6);
   vertex(374, 54);
@@ -301,7 +390,7 @@ eyebro() {
   endShape();
 
 }
-//额头蓝点
+//blue on head
  etou() {
   fill("#e5f8ef");
   noStroke();
@@ -331,7 +420,7 @@ eyebro() {
 
 
 }
-//腮红(左边)
+//left pinky
  pinky() {
   fill("#ffcce6");
   beginShape();
@@ -346,7 +435,7 @@ eyebro() {
   bezierVertex(41, 204, 43, 211, 47, 215);
   endShape();
 
-  //腮红(右边)
+  //right pinky
   beginShape();
   vertex(428, 200);
   quadraticVertex(470, 186, 507, 210);
@@ -358,7 +447,7 @@ eyebro() {
   bezierVertex(519, 218, 514, 240, 497, 244);
   endShape();
 
-  //害羞(左边)
+  //lines to be shy left
   stroke("#361909");
   strokeWeight(6);
   beginShape();
@@ -370,7 +459,7 @@ eyebro() {
   bezierVertex(90, 202, 91, 202, 88, 205);
   bezierVertex(80, 215, 78, 216, 82, 212);
   endShape();
-  //害羞(右边)
+  //lines to be shy right
   beginShape();
   vertex(448, 218);
   vertex(443, 224);
@@ -402,7 +491,7 @@ eyebro() {
 }
 
  eye() {
-  //眼睛(左边)
+  //left eye
   fill("#35190d");
   beginShape();
   vertex(129, 140);
@@ -410,7 +499,7 @@ eyebro() {
   bezierVertex(92, 249, 85, 165, 129, 140);
   endShape();
 
-  //眼睛(右边)
+  //right eye
   beginShape();
   vertex(332, 154);
   bezierVertex(421, 108, 462, 208, 407, 240);
@@ -419,7 +508,7 @@ eyebro() {
 
 
 
-  //睫毛(左边)
+  //eyelash left
   stroke("#35190d");
   strokeWeight(6);
   beginShape();
@@ -427,14 +516,14 @@ eyebro() {
   vertex(129, 131);
   endShape();
 
-  //睫毛(右边)
+  //eyelash right
   beginShape();
   vertex(334, 156);
   vertex(328, 146);
   endShape();
 
 
-  //眼珠(左边)
+  //eye highlight left
   fill(255);
   beginShape();
   vertex(177, 151);
@@ -442,7 +531,7 @@ eyebro() {
   bezierVertex(168, 164, 168, 152, 177, 151);
   endShape();
 
-  //眼珠(右边)
+  //eye highlight right
   beginShape();
   vertex(393, 154);
   bezierVertex(406, 155, 402, 171, 393, 169);
@@ -453,7 +542,7 @@ eyebro() {
 
  nose() {
 
-  //鼻子
+  //nose
 
   beginShape();
   fill("#35190e");
@@ -470,7 +559,7 @@ eyebro() {
 }
 
  heart() {
-  //爱心
+  //heart
   stroke("#33190c");
   fill("#fe0000");
   strokeWeight(10);
@@ -487,7 +576,7 @@ eyebro() {
   endShape();
 
 
-  //爱心中心
+  //less red inside the heart 
   fill("#ff334c");
   noStroke();
   beginShape();
@@ -510,7 +599,7 @@ eyebro() {
 
 }
  hands() {
-  //手(左边)
+  //left hand
   stroke("#33190c");
   fill("#ffffd9");
   strokeWeight(6);
@@ -520,7 +609,7 @@ eyebro() {
   bezierVertex(92, 418, 74, 390, 98, 377);
   endShape();
 
-  //手(右边)
+  //right hand
   beginShape();
   vertex(395, 434);
   bezierVertex(363, 407, 394, 366, 429, 388);
