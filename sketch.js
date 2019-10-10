@@ -7,10 +7,12 @@ let t = 0;
 let a = 0;
 let b = 0;
 let c = 0;
+
+
+
 function setup() {
   createCanvas(800, 800);
   angleMode(RADIANS);
-
 
 }
 
@@ -22,11 +24,13 @@ function draw() {
    cat.display();
    ma = new Ma();
    cute = new Cute(mouseX,mouseY,0.3);
-   cute.display();
+  
   xpos = 235 - 30 * t
   t = t + 0.02
   ypos = 16 + 25 * a
   a = a + 0.02
+
+
   if (second() == 5) {
     background(220);
     cat.display1();
@@ -46,6 +50,7 @@ function draw() {
     a = 0;
     b = 0;
   }
+
 }
 
 class Cat {
@@ -75,6 +80,7 @@ class Cat {
     this.eye1();
     this.ear();
     this.zhuazi();
+
   }
  kuohao() {
  
@@ -94,7 +100,24 @@ class Cat {
     strokeWeight(4);
     ellipse(this.x - 30, this.y - 5, 5, 10);
     ellipse(this.x + 30, this.y - 5, 5, 10);
-}
+      push();
+    strokeWeight(2);
+    line(this.x - 30, this.y - 10, this.x - 35, this.y - 12);
+    line(this.x + 30, this.y - 10, this.x + 25, this.y - 12);
+    pop();
+  }
+eye1() {
+
+    strokeWeight(4);
+    ellipse(this.x - 30, this.y - 5, 5, 10);
+    //ellipse(this.x + 30, this.y - 5, 5, 10);
+    line(this.x + 25, this.y - 5, this.x + 35, this.y - 5);
+    push();
+    strokeWeight(2);
+    line(this.x - 30, this.y - 10, this.x - 35, this.y - 12);
+    line(this.x + 25, this.y - 5, this.x + 20, this.y - 7);
+    pop();
+  }
 ear() {
 
     noStroke();
@@ -114,14 +137,21 @@ ear() {
     noFill()
     arc(this.x - 100, this.y, 30, 30, PI, 2 * PI)
     arc(this.x + 100, this.y, 30, 30, PI, 2 * PI)
+     push();
+    fill('#FFACC2');
     ellipse(this.x - 100, this.y + 5, 15, 15)
     ellipse(this.x + 100, this.y + 5, 15, 15)
+       pop();
     line(this.x - 108, this.y - 8, this.x - 110, this.y - 20)
     line(this.x - 100, this.y - 10, this.x - 100, this.y - 22)
     line(this.x - 92, this.y - 8, this.x - 90, this.y - 20)
     line(this.x + 108, this.y - 8, this.x + 110, this.y - 20)
     line(this.x + 100, this.y - 10, this.x + 100, this.y - 22)
     line(this.x + 92, this.y - 8, this.x + 90, this.y - 20)
+    line(this.x - 115, this.y + 15, this.x - 115, this.y);
+    line(this.x - 85, this.y + 15, this.x - 85, this.y);
+    line(this.x + 115, this.y + 15, this.x + 115, this.y);
+    line(this.x + 85, this.y + 15, this.x + 85, this.y);
 
 
 
