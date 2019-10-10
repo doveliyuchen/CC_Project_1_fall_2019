@@ -17,28 +17,38 @@ function setup() {
 }
 
 function draw() {
+
   stroke(0);
   background(220);
   noFill();
    cat = new Cat(400, 400, 10);
+
    cat.display();
-   ma = new Ma();
-   cute = new Cute(mouseX,mouseY,0.3);
   
+
+ 
+  if (millis() > 5000 && millis() < 6000) {
+    background(220);
+    cat.display1();
+  }
+
+  if (millis() > 7000) {
+    aa();
+
+  }
+
+}
+
+function aa() {
+
+  ma = new Ma();
+  cute = new Cute(xpos, ypos, 0.3);
+  ma.display();
+  cute.display();
   xpos = 235 - 30 * t
   t = t + 0.02
   ypos = 16 + 25 * a
   a = a + 0.02
-
-
-  if (second() == 5) {
-    background(220);
-    cat.display1();
-  } else if (second() > 7 && second() < 300) {
-    ma.display();
-    cute.display();
-
-  }
   if (t > 5.1 / 1.015) {
     xpos = 235 - 30 * t + 45 * b
     b = b + 0.02
@@ -50,8 +60,8 @@ function draw() {
     a = 0;
     b = 0;
   }
-
 }
+
 
 class Cat {
 
@@ -159,7 +169,7 @@ ear() {
 
 
 }
-class Map {
+class Ma {
 
 
  display() {
@@ -218,7 +228,7 @@ class Cute{
   push();
   scale(this.a);
   translate(this.x/this.a,this.y/this.a)
-  background(220);
+
   this.weiba();
   this.body();
   this.whiteBody();
